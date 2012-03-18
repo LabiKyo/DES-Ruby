@@ -26,4 +26,27 @@ I'm [**Labi Kyo**](mailto:labikyo@gmail.com), **Li Xinyue**, BUAA Software Engin
 Why You Create This Repository?
 -------------------------------
 
-I know there are trousands of implementation for DES and mine might be the worst, I just do it in order to prove that I implement this algorithm myself. It's also a practice for sharing and open-source coding. Also, I want to have some code to show my future employer and friends.
+I know there are thousands of implementation for DES and mine might be the worst, I just do it in order to prove that I implement this algorithm myself. It's also a practice for sharing and open-source coding. Also, I want to have some code to show my future employer and friends.
+
+It's the first time I follow GPL's document and really use a license. It's also the first time I use markdown to write documents. I feels good and I'd like to contribute more open-source codes.
+
+License
+-------
+(The GPL License)
+
+Copyright © 2012 Labi Kyo <<labikyo@gmail.com>>
+
+This file is part of DES Ruby Implementation.
+
+DES Ruby Implementation is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+DES Ruby Implementation is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with DES Ruby Implementation.  If not, see <http://www.gnu.org/licenses/>.
