@@ -1,0 +1,5 @@
+source "http://ruby.taobao.org"
+gem "rspec"
+gem "autotest-standalone"
+gem "autotest-growl"
+gem "autotest-fsevent"
