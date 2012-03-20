@@ -7,7 +7,7 @@ Contents
 - [What's This?](#what-is-this)
 - [What's DES?](#what-is-des)
 - [What's Ruby?](#what-is-ruby)
-- [Who are you?](#who-are-you)
+- [Who Are You?](#who-are-you)
 - [Why You Create This Repository?](#why-you-create-this-repository)
 - [License](#license)
 
@@ -16,7 +16,7 @@ Contents
 What's This?
 ------------
 
-Just as the name implies, this is a DES Ruby Implementation. It is a homework assignment of BUAA Software Engineering's information security course. [**Wang Haiquan**](mailto:whq@buaa.edu.cn) is the lecturer of this course.
+Just as the name implies, this is a DES Ruby Implementation. It is a homework assignment of BUAA Software Engineering's information security course. [**Wang Haiquan**](mailto:whq@buaa.edu.cn) is the lecturer of this course. And [**Yu Yang**](mailto:whqkiko441500@163.com) is the TA.
 
 I'm asked to implement DES using C or Java, but I haven't been coding C/Java for a long time, and more familiar with scripting languages like Python, CoffeeScript/JavaScript, Ruby. So I decided to implement DES in Ruby first as a good starting point, then rewrite it using C or Java.
 
@@ -24,27 +24,27 @@ I'm asked to implement DES using C or Java, but I haven't been coding C/Java for
 What's DES?
 -----------
 
-Please check [this wiki page](https://en.wikipedia.org/wiki/Data_Encryption_Standard#Description).
+Please check [this wiki page](https://en.wikipedia.org/wiki/Data_Encryption_Standard).
 
 <a name="what-is-ruby">
 What's Ruby?
 ------------
 
-You can check [its offical website](http://ruby-lang.org), or if you prefer, [this wiki page](https://en.wikipedia.org/wiki/Ruby_%28programming_language%29).
+You can check [its offical website](http://ruby-lang.org), or [this wiki page](https://en.wikipedia.org/wiki/Ruby_%28programming_language%29) if you prefer.
 
 <a name="who-are-you">
 Who Are You?
 ------------
 
-I'm [**Labi Kyo**](mailto:labikyo@gmail.com), **Li Xinyue**, BUAA Software Engineering Junior, web developer, starter. Love Python,Ruby and JavaScript, write nodejs/Rails.
+I'm [**Labi Kyo**](mailto:labikyo@gmail.com) (**Li Xinyue**), BUAA Software Engineering Junior, web developer, starter. Love Python,Ruby and JavaScript, write nodejs/Rails.
 
 <a name="why-you-create-this-repository">
 Why You Create This Repository?
 -------------------------------
 
-I know there are thousands of implementation for DES and mine might be the worst, I just do it in order to prove that I implement this algorithm myself. It's also a practice for sharing and open-source coding. Also, I want to have some code to show my future employer and friends.
+I know there are thousands of implementation for DES and mine might be the worst, I just do it in order to prove that I implement this algorithm myself. It's also a practice for BDD, sharing and open-source coding. Also, I want to have some code to show my future employe{r,e} and friends.
 
-It's the first time I follow GPL's document and really use a license. It's also the first time I use markdown to write documents. I feels good and I'd like to contribute more open-source codes.
+It's the first time I follow GPL's document and really use a license. It's also the first time I use markdown to write documents. I'm feeling pretty good and I'd like to contribute more open-source codes.
 
 <a name="license">
 License
