@@ -86,12 +86,14 @@ class Key
 
   def generate_subkey
     @round = []
+    @subkey = []
     @round[0] = Array.new(56) {|i| @key[PC1[i]]}.join
     1.upto 16 do |i|
       rotation = ROTATION[i-1]
       left = @round[i-1][0...28].left_rotate(rotation)
       right = @round[i-1][28..-1].left_rotate(rotation)
       @round[i] = left + right
+      @subkey[i] = Array.new(48) {|j| @round[i][PC2[j]]}.join
     end
   end
 
