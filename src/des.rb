@@ -10,3 +10,17 @@ class String
   end
 
 end
+
+class Key
+
+  # attributes
+  attr_accessor :key
+
+  def initialize key_string
+    unless key_string.length == 16 and key_string.is_hex
+      raise ArgumentError, "Should be initialized with 16 hex numbers"
+    end
+    @key = '%064d' % key_string.hex.to_s(2)
+  end
+
+end
