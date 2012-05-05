@@ -68,13 +68,20 @@ ROTATION = "
 class Key
 
   # attributes
-  attr_accessor :key
+  attr_reader :key, :round, :subkey
 
+  # methods
   def initialize key_string
     unless key_string.length == 16 and key_string.is_hex
       raise ArgumentError, "Should be initialized with 16 hex numbers"
     end
     @key = '%064d' % key_string.hex.to_s(2)
+    self.generate_subkey
+  end
+
+  def generate_subkey
+    @round = []
+    @round[0] = Array.new(56) {|i| @key[PC1[i]]}.join
   end
 
 end
