@@ -14,6 +14,11 @@ class String
     self.split(" ").map{|str| str.to_i - 1}
   end
 
+  def left_rotate bit
+    l = self.length
+    self[bit...l] + self[0...bit]
+  end
+
 end
 
 # constant variables
@@ -63,7 +68,7 @@ ROTATION = "
 14  2
 15  2
 16  1
-".split("\n").map{|pair| pair.split(' ')[1].to_i}
+".split("\n").map{|pair| pair.split(' ')[1].to_i}.drop(1)
 
 class Key
 
@@ -82,6 +87,12 @@ class Key
   def generate_subkey
     @round = []
     @round[0] = Array.new(56) {|i| @key[PC1[i]]}.join
+    1.upto 16 do |i|
+      rotation = ROTATION[i-1]
+      left = @round[i-1][0...28].left_rotate(rotation)
+      right = @round[i-1][28..-1].left_rotate(rotation)
+      @round[i] = left + right
+    end
   end
 
 end
