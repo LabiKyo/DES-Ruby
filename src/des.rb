@@ -211,12 +211,14 @@ class Key
     left[0] = round0[0...32]
     right[0] = round0[32..-1]
 
-    left[1] = right[0]
-    e_right[1] = Array.new(48) {|i| right[1-1][E[i]]}.join
-    mixin[1] = '%048d' % (e_right[1].to_i(2) ^ @subkey[1].to_i(2)).to_s(2)
-    s_right[1] = mixin[1].scan(/.{6}/).map.with_index {|label, box| SBOX[box].get label}.join
-    f_right[1] = Array.new(32) {|i| s_right[1][P[i]]}.join
-    right[1] = '%032d' % (left[0].to_i(2) ^ f_right[1].to_i(2)).to_s(2)
+    1.upto 16 do |round|
+      left[round] = right[round - 1]
+      e_right[round] = Array.new(48) {|i| right[round - 1][E[i]]}.join
+      mixin[round] = '%048d' % (e_right[round].to_i(2) ^ @subkey[round].to_i(2)).to_s(2)
+      s_right[round] = mixin[round].scan(/.{6}/).map.with_index {|label, box| SBOX[box].get label}.join
+      f_right[round] = Array.new(32) {|i| s_right[round][P[i]]}.join
+      right[round] = '%032d' % (left[round - 1].to_i(2) ^ f_right[round].to_i(2)).to_s(2)
+    end
 
     result = {
       :left => left,
