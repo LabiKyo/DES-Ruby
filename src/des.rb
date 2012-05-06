@@ -14,6 +14,11 @@ class String
     self.split(" ").map{|str| str.to_i - 1}
   end
 
+  # 应用rules进行置换
+  def permute rules
+    return Array.new(rules.length) {|i| self[rules[i]]}.join
+  end
+
   def left_rotate bit
     l = self.length
     self[bit...l] + self[0...bit]
@@ -189,13 +194,13 @@ class Key
   def generate_subkey
     @round = []
     @subkey = []
-    @round[0] = Array.new(56) {|i| @key[PC1[i]]}.join
+    @round[0] = @key.permute PC1
     1.upto 16 do |round|
       rotation = ROTATION[round-1]
       left = @round[round-1][0...28].left_rotate(rotation)
       right = @round[round-1][28..-1].left_rotate(rotation)
       @round[round] = left + right
-      @subkey[round] = Array.new(48) {|j| @round[round][PC2[j]]}.join
+      @subkey[round] = @round[round].permute PC2
     end
   end
 
@@ -215,21 +220,21 @@ class Key
     s_right = ['']
     f_right = ['']
 
-    round0 = Array.new(64) {|i| entity[IP[i]]}.join
+    round0 = entity.permute IP
     left[0] = round0[0...32]
     right[0] = round0[32..-1]
 
     1.upto 16 do |round|
       subkey = is_encrpty ? round : 17 - round
       left[round] = right[round - 1]
-      e_right[round] = Array.new(48) {|i| right[round - 1][E[i]]}.join
+      e_right[round] = right[round-1].permute  E
       mixin[round] = '%048d' % (e_right[round].to_i(2) ^ @subkey[subkey].to_i(2)).to_s(2)
       s_right[round] = mixin[round].scan(/.{6}/).map.with_index {|label, box| SBOX[box].get label}.join
-      f_right[round] = Array.new(32) {|i| s_right[round][P[i]]}.join
+      f_right[round] = s_right[round].permute P
       right[round] = '%032d' % (left[round - 1].to_i(2) ^ f_right[round].to_i(2)).to_s(2)
     end
     final = right[16] + left[16]
-    result = Array.new(64) {|i| final[FP[i]]}.join
+    result = final.permute FP
 
     output = {
       :left => left,
