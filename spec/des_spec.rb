@@ -42,6 +42,13 @@ SK = [
   '000100010111110010000001110101111110000101001110', # SK[16]
 ]
 
+S1 = "
+14  4   13  1   2   15  11  8   3   10  6   12  5   9   0   7
+0   15  7   4   14  2   13  1   10  6   12  11  9   5   3   8
+4   1   14  8   13  6   2   11  15  12  9   7   3   10  5   0
+15  12  8   2   4   9   1   7   5   11  3   14  10  0   6   13
+"
+
 describe String do
   context "when calling #is_hex" do
     it "return true if it's hex" do
@@ -83,6 +90,21 @@ describe Key do
   1.upto 16 do |i|
     it "has the right subkey #{i}" do
       @key.subkey[i].should eq SK[i]
+    end
+  end
+
+  describe SBox do
+    it "initialize with 12 x 4 table string" do
+      sbox = SBox.new S1
+    end
+    context "when calling SBox#get" do
+      it "return right bit string" do
+        s1 = SBox.new S1
+        s1.get('000000').should eq '1110' # S1[1][1] == 14
+        s1.get('000010').should eq '0100' # S1[1][2] == 4
+        s1.get('000001').should eq '0000' # S1[2][1] == 0
+        s1.get('101000').should eq '1101' # S1[3][5] == 13
+      end
     end
   end
 end
