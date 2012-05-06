@@ -200,6 +200,14 @@ class Key
   end
 
   def entity_encrypt plain_bits
+    _entity_process plain_bits
+  end
+
+  def entity_decrypt secret
+    _entity_process secret, false
+  end
+
+  def _entity_process entity, is_encrpty = true
     left = []
     right = []
     e_right = ['']
@@ -207,31 +215,32 @@ class Key
     s_right = ['']
     f_right = ['']
 
-    round0 = Array.new(64) {|i| plain_bits[IP[i]]}.join
+    round0 = Array.new(64) {|i| entity[IP[i]]}.join
     left[0] = round0[0...32]
     right[0] = round0[32..-1]
 
     1.upto 16 do |round|
+      subkey = is_encrpty ? round : 17 - round
       left[round] = right[round - 1]
       e_right[round] = Array.new(48) {|i| right[round - 1][E[i]]}.join
-      mixin[round] = '%048d' % (e_right[round].to_i(2) ^ @subkey[round].to_i(2)).to_s(2)
+      mixin[round] = '%048d' % (e_right[round].to_i(2) ^ @subkey[subkey].to_i(2)).to_s(2)
       s_right[round] = mixin[round].scan(/.{6}/).map.with_index {|label, box| SBOX[box].get label}.join
       f_right[round] = Array.new(32) {|i| s_right[round][P[i]]}.join
       right[round] = '%032d' % (left[round - 1].to_i(2) ^ f_right[round].to_i(2)).to_s(2)
     end
     final = right[16] + left[16]
-    secret = Array.new(64) {|i| final[FP[i]]}.join
+    result = Array.new(64) {|i| final[FP[i]]}.join
 
-    result = {
+    output = {
       :left => left,
       :right => right,
       :e_right => e_right,
       :mixin => mixin,
       :s_right => s_right,
       :f_right => f_right,
-      :secret => secret
+      :result => result
     }
-    return result
+    return output
   end
 
 end

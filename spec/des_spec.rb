@@ -227,13 +227,17 @@ describe Key do
       end
     end
     it "has the right secret string" do
-      @entity_secret[:secret].should eq SECRET_BIT
+      @entity_secret[:result].should eq SECRET_BIT
     end
 
   end
 
   # decrypt
   context "when decrypting" do
+    it "return original value" do
+      @entity_secret = @key.entity_encrypt PLAIN_BIT
+      @key.entity_decrypt(@entity_secret[:result])[:result].should eq PLAIN_BIT
+    end
   end
 
   describe SBox do
