@@ -41,6 +41,32 @@ SK = [
   '001110100001010010011100111101101000001111110010', # SK[15]
   '000100010111110010000001110101111110000101001110', # SK[16]
 ]
+PLAIN_ASCII = 'abcdefgh'
+PLAIN_BIT = '0110000101100010011000110110010001100101011001100110011101101000'
+LR = [
+  '1111111100000000011110000101010100000000111111111000000001100110', # LR[0]
+  '0000000011111111100000000110011010100000101001110010001001111010', # LR[1]
+]
+
+ER = [
+  '', # none
+  '000000000001011111111111110000000000001100001100', # ER[1]
+]
+
+MIXIN = [
+  '', # none
+  '010111000001111110110011100101011000110001000011', # MIXIN[1]
+]
+
+SR = [
+  '', # none
+  '10110011011101001100111010011111', # SR[1]
+]
+
+FR = [
+  '', # none
+  '01011111101001110101101000101111', # FR[1]
+]
 
 S1 = "
 14  4   13  1   2   15  11  8   3   10  6   12  5   9   0   7
@@ -63,6 +89,7 @@ describe String do
   context "when calling #left_rotate(i)" do
     it "left rotate i bits" do
       "01234".left_rotate(1).should eq "12340"
+      "01234".left_rotate(2).should eq "23401"
     end
   end
 end
@@ -71,6 +98,8 @@ describe Key do
   before :each do
     @key = Key.new KEY_HEX
   end
+
+  # initialize
   it "initialize with 16 hex numbers" do
     key = Key.new KEY_HEX
     key.key.should eq KEY_BIT
@@ -80,17 +109,52 @@ describe Key do
       Key.new '123'
     }.to raise_error ArgumentError
   end
-  # rounds
-  0.upto 16 do |i|
-    it "has the right round #{i}" do
-      @key.round[i].should eq ROUND[i]
+
+  # sub-key rounds
+  0.upto 16 do |round|
+    it "has the right sub-key round #{round}" do
+      @key.round[round].should eq ROUND[round]
     end
   end
+
   # sub-keys
-  1.upto 16 do |i|
-    it "has the right subkey #{i}" do
-      @key.subkey[i].should eq SK[i]
+  1.upto 16 do |round|
+    it "has the right subkey #{round}" do
+      @key.subkey[round].should eq SK[round]
     end
+  end
+
+  # encrypt
+  context "when encrypting" do
+    before :each do
+      @entity_secret = @key.entity_encrypt PLAIN_BIT
+    end
+
+    0.upto 1 do |round|
+      it "has the right left/right #{round}" do
+        (@entity_secret[:left][round] + @entity_secret[:right][round]).should eq LR[round]
+      end
+    end
+
+    it "has the right e-right 1" do
+      @entity_secret[:e_right][1].should eq ER[1]
+    end
+
+    it "has the right minxin 1" do
+      @entity_secret[:mixin][1].should eq MIXIN[1]
+    end
+
+    it "has the right s-right 1" do
+      @entity_secret[:s_right][1].should eq SR[1]
+    end
+
+    it "has the right f-right 1" do
+      @entity_secret[:f_right][1].should eq FR[1]
+    end
+  end
+
+  # decrypt
+  context "when decrypting" do
   end
 
   describe SBox do
