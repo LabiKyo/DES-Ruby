@@ -219,6 +219,8 @@ class Key
       f_right[round] = Array.new(32) {|i| s_right[round][P[i]]}.join
       right[round] = '%032d' % (left[round - 1].to_i(2) ^ f_right[round].to_i(2)).to_s(2)
     end
+    final = right[16] + left[16]
+    secret = Array.new(64) {|i| final[FP[i]]}.join
 
     result = {
       :left => left,
@@ -227,6 +229,7 @@ class Key
       :mixin => mixin,
       :s_right => s_right,
       :f_right => f_right,
+      :secret => secret
     }
     return result
   end
