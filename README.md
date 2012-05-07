@@ -1,5 +1,5 @@
-DES Ruby Implementation
-=======================
+DES Ruby
+========
 
 Contents
 --------
