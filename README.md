@@ -36,7 +36,7 @@ You can check [its offical website](http://ruby-lang.org), or [this wiki page](h
 Who Are You?
 ------------
 
-I'm [**Labi Kyo**](mailto:labikyo@gmail.com) (**Li Xinyue**), BUAA Software Engineering Junior, web developer, starter. Love Python,Ruby and JavaScript, write nodejs/Rails.
+I'm [**Labi Kyo**](mailto:labikyo@gmail.com) ( **Li Xinyue** ), BUAA Software Engineering Junior, web developer, starter. Love Python,Ruby and JavaScript, write nodejs/Rails.
 
 <a name="why-you-create-this-repository">
 Why You Create This Repository?
